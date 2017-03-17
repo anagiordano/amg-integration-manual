@@ -136,7 +136,7 @@ git clone https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-inve
 git clone https://github.com/ibm-cloud-architecture/refarch-cloudnative-api
 git clone https://github.com/ibm-cloud-architecture/refarch-cloudnative-netflix-zuul
 cd refarch-cloudnative-api 
-git checkout 555d5cc380af08876b0aa65c22d357ee4806d645
+git checkout 713ff236c7184f5a26987e27a6d0091ab1314ed9
 cd ..
 
 echo "#######################################################################"
