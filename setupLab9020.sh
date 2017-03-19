@@ -80,6 +80,10 @@ echo "#######################################################################"
 echo "# 3. Create eureka and zuul"
 cf ic cpi vbudi/refarch-eureka  registry.$region.bluemix.net/$ns/eureka-$suffix
 cf ic cpi vbudi/refarch-zuul  registry.$region.bluemix.net/$ns/zuul-$suffix
+
+cf ic login
+sleep 10
+ 
 cf ic group create --name eureka_cluster --publish 8761 --memory 256 --auto --min 1 --max 3 --desired 1 -n netflix-eureka-$suffix -d $domreg$dom -e eureka.client.fetchRegistry=true -e eureka.client.registerWithEureka=true -e eureka.client.serviceUrl.defaultZone=http://netflix-eureka-$suffix.$domreg$dom/eureka/ -e eureka.instance.hostname=eureka-$suffix.$domreg$dom -e eureka.instance.nonSecurePort=80 -e eureka.port=80 registry.$region.bluemix.net/$ns/eureka-$suffix
 cf ic group create --name zuul_cluster --publish 8080 --memory 256 --auto --min 1 --max 3 --desired 1 -n netflix-zuul-$suffix -d $domreg$dom -e eureka.client.serviceUrl.defaultZone="http://netflix-eureka-$suffix.$domreg$dom/eureka" -e eureka.instance.hostname=netflix-zuul-$suffix.$domreg$dom -e eureka.instance.nonSecurePort=80 -e eureka.instance.preferIpAddress=false -e spring.cloud.client.hostname=zuul-$suffix.$domreg$dom registry.$region.bluemix.net/$ns/zuul-$suffix
 
@@ -135,9 +139,8 @@ cd /home/bmxuser
 git clone https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-inventory
 git clone https://github.com/ibm-cloud-architecture/refarch-cloudnative-api
 git clone https://github.com/ibm-cloud-architecture/refarch-cloudnative-netflix-zuul
-cd refarch-cloudnative-api 
-git checkout 713ff236c7184f5a26987e27a6d0091ab1314ed9
-cd ..
+
+cd /home/bmxuser/refarch-cloudnative-api; git checkout 713ff236c7184f5a26987e27a6d0091ab1314ed9
 
 echo "#######################################################################"
 echo "# 4a Install Inventory BFF"
