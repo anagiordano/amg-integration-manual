@@ -49,6 +49,9 @@ if [ $logerr -eq 1 ]; then
   echo "#    Login failed... Exiting"
   exit
 fi
+cf uninstall-plugin IBM-Containers
+cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x64
+
 # get space and org info
 orgtxt=`cf target | grep "Org:" | awk '{print $2}'`
 spctxt=`cf target | grep "Space:" | awk '{print $2}'`
